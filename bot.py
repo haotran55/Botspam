@@ -402,16 +402,23 @@ def TimeStamp():
     return datetime.datetime.now().strftime("%Y-%m-%d")
 
 API_URL = "https://api.ffcommunity.site/randomvideo.php"
-@dp.message(Command("randomvideo"))  # Cách dùng đúng trong aiogram v3
-async def send_random_video(message: Message):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(API_URL) as response:
-            if response.status == 200:
-                video_url = await response.text()
-                await message.answer_video(video_url)
-            else:
-                await message.answer("Không thể lấy video, thử lại sau!")
 
+@dp.message(Command("randomvideo"))
+async def send_random_video(message: Message):
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(API_URL) as response:
+                if response.status == 200:
+                    video_url = await response.text()
+                    if video_url.startswith("http"):  # Kiểm tra xem API có trả về URL hợp lệ không
+                        await message.answer_video(video_url)
+                    else:
+                        await message.answer(f"Lỗi: API trả về dữ liệu không hợp lệ - {video_url}")
+                else:
+                    await message.answer(f"Lỗi: API không phản hồi, mã lỗi HTTP {response.status}")
+    except Exception as e:
+        await message.answer(f"Lỗi: {str(e)}")
+        
 @bot.message_handler(commands=['getkey'])
 def startkey(message):
     user_id = message.from_user.id
