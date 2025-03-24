@@ -126,7 +126,7 @@ def handle_command(message):
         basic_info = data
         clan_info = data.get('Guild Information', {})
         leader_info = data.get('Guild Leader Information', {})
-        avatar_url = basic_info.get('AccountEXP', 'Hiện tại đang bảo chì')
+        avatar_url = basic_info.get('AccountAvatarId', 'Hiện tại đang bảo chì')
 
         def get_value(key, data_dict):
             return data_dict.get(key, "Hiện tại server đang quá tải, vui lòng chờ")
@@ -138,20 +138,20 @@ Avatar: <a href="{avatar_url}">Nhấn để xem</a>
 Nickname: {get_value('AccountName', basic_info)}
 Cấp độ: {get_value('AccountLevel', basic_info)}
 Khu vực: {get_value('AccountRegion', basic_info)}
-Xếp hạng Sinh Tồn: {get_value('BR Rank Points', basic_info)}
-Tổng Sao Tử Chiến: {get_value('CS Rank Points', basic_info)}
-Số lượt thích: {get_value('Account Likes', basic_info)}
-Lần đăng nhập gần nhất: {get_value('Account Last Login (GMT 0530)', basic_info)}
-Ngôn ngữ: {get_value('Account Language', basic_info)}
-Tiểu sử game: {get_value('Account Signature', basic_info)}
+Xếp hạng Sinh Tồn: {get_value('BrRank', basic_info)}
+Tổng Sao Tử Chiến: {get_value('CsRank', basic_info)}
+Số lượt thích: {get_value('AccountLikes', basic_info)}
+Lần đăng nhập gần nhất: {get_value('AccountLastLogin', basic_info)}
+Ngôn ngữ: {get_value('AccountLanguage', basic_info)}
+Tiểu sử game: {get_value('AccountSignature', basic_info)}
 
 <b>Thông tin quân đoàn:</b>
-Tên quân đoàn: {get_value('Guild Name', clan_info)}
-Cấp độ quân đoàn: {get_value('Guild Level', clan_info)}
-Sức chứa: {get_value('Guild Capacity', clan_info)}
-Số thành viên hiện tại: {get_value('Guild Current Members', clan_info)}
-Chủ quân đoàn: {get_value('Leader Name', leader_info)}
-Cấp độ chủ quân đoàn: {get_value('Leader Level', leader_info)}
+Tên quân đoàn: {get_value('GuildName', clan_info)}
+Cấp độ quân đoàn: {get_value('GuildLevel', clan_info)}
+Sức chứa: {get_value('GuildCapacity', clan_info)}
+Số thành viên hiện tại: {get_value('GuildMembers', clan_info)}
+Chủ quân đoàn: {get_value('LeaderName', leader_info)}
+Cấp độ chủ quân đoàn: {get_value('LeaderLevel', leader_info)}
 </blockquote>
 """
 
