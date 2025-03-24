@@ -33,6 +33,7 @@ bot=telebot.TeleBot("7920158658:AAGyY9jA2B5Z3_n3vZzzQBDYaJoAddPqZ7s")
 #real 
 #phu 8127007530:AAG1b4w__xXvIrAr7woZjN8BrC_l3g1hBwI
 print("Bot đã được khởi động thành công")
+dp = Dispatcher()
 users_keys = {}
 key = ""
 user_cooldown = {}
@@ -399,8 +400,8 @@ def TimeStamp():
     return datetime.datetime.now().strftime("%Y-%m-%d")
 
 API_URL = "https://api.ffcommunity.site/randomvideo.php"
-@dp.message_handler(commands=['randomvideo'])
-async def send_random_video(message: types.Message):
+@dp.message(Command("randomvideo"))
+async def send_random_video(message: Message):
     async with aiohttp.ClientSession() as session:
         async with session.get(API_URL) as response:
             if response.status == 200:
