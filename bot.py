@@ -20,6 +20,11 @@ from telebot import types
 from time import strftime
 import queue
 import pytz
+import asyncio
+import aiohttp
+from aiogram import Bot, Dispatcher, types
+from aiogram.types import FSInputFile
+from aiogram.utils import executor
 admin_diggory = "ad_an_danhso5" 
 name_bot = "HaoEsports"
 zalo = "0585019743"
@@ -392,6 +397,17 @@ def TimeStamp():
 
 def TimeStamp():
     return datetime.datetime.now().strftime("%Y-%m-%d")
+
+API_URL = "https://api.ffcommunity.site/randomvideo.php"
+@dp.message_handler(commands=['randomvideo'])
+async def send_random_video(message: types.Message):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(API_URL) as response:
+            if response.status == 200:
+                video_url = await response.text()
+                await message.reply_video(video_url)
+            else:
+                await message.reply("Không thể lấy video, thử lại sau!")
 
 @bot.message_handler(commands=['getkey'])
 def startkey(message):
