@@ -6,4 +6,5 @@ gtts==2.5.1
 pytz==2024.1
 aiogram
 aiohttp
+apscheduler
 
