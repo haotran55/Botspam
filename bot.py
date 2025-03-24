@@ -124,8 +124,8 @@ def handle_command(message):
     try:
         data = fetch_data(user_id)
         basic_info = data
-        clan_info = data.get('Guild Information', {})
-        leader_info = data.get('Guild Leader Information', {})
+        clan_info = data.get('GuildInformation', {})
+        leader_info = data.get('GuildLeader', {})
         avatar_url = basic_info.get('AccountAvatarId', 'Hiện tại đang bảo chì')
 
         def get_value(key, data_dict):
@@ -149,7 +149,7 @@ Tiểu sử game: {get_value('AccountSignature', basic_info)}
 Tên quân đoàn: {get_value('GuildName', clan_info)}
 Cấp độ quân đoàn: {get_value('GuildLevel', clan_info)}
 Sức chứa: {get_value('GuildCapacity', clan_info)}
-Số thành viên hiện tại: {get_value('GuildMembers', clan_info)}
+Số thành viên hiện tại: {get_value('GuildMember', clan_info)}
 Chủ quân đoàn: {get_value('LeaderName', leader_info)}
 Cấp độ chủ quân đoàn: {get_value('LeaderLevel', leader_info)}
 </blockquote>
