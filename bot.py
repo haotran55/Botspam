@@ -126,7 +126,7 @@ def handle_command(message):
         basic_info = data
         clan_info = data.get('Guild Information', {})
         leader_info = data.get('Guild Leader Information', {})
-        avatar_url = basic_info.get('Account Avatar Image', 'Hiện tại server đang quá tải, vui lòng chờ')
+        avatar_url = basic_info.get('AccountEXP', 'Hiện tại đang bảo chì')
 
         def get_value(key, data_dict):
             return data_dict.get(key, "Hiện tại server đang quá tải, vui lòng chờ")
@@ -135,9 +135,9 @@ def handle_command(message):
 <blockquote>
 <b>Thông tin cơ bản:</b>
 Avatar: <a href="{avatar_url}">Nhấn để xem</a>
-Nickname: {get_value('Account Name', basic_info)}
-Cấp độ: {get_value('Account Level', basic_info)}
-Khu vực: {get_value('Account Region', basic_info)}
+Nickname: {get_value('AccountName', basic_info)}
+Cấp độ: {get_value('AccountLevel', basic_info)}
+Khu vực: {get_value('AccountRegion', basic_info)}
 Xếp hạng Sinh Tồn: {get_value('BR Rank Points', basic_info)}
 Tổng Sao Tử Chiến: {get_value('CS Rank Points', basic_info)}
 Số lượt thích: {get_value('Account Likes', basic_info)}
