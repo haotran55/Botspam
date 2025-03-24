@@ -4,4 +4,6 @@ requests==2.28.2
 psutil==5.9.8
 gtts==2.5.1
 pytz==2024.1
+aiogram
 aiohttp
+
