@@ -124,8 +124,8 @@ def handle_command(message):
     try:
         data = fetch_data(user_id)
         basic_info = data
-        clan_info = data.get('GuildInformation', {})
-        leader_info = data.get('GuildLeader', {})
+        clan_info = data.get('Guild Information', {})
+        leader_info = data.get('Guild Leader', {})
         avatar_url = basic_info.get('AccountAvatarId', 'Hiện tại đang bảo chì')
 
         def get_value(key, data_dict):
