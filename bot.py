@@ -387,95 +387,11 @@ def search_google_image(message):
 
 def TimeStamp():
     return datetime.datetime.now().strftime("%Y-%m-%d")
-
-@bot.message_handler(commands=['spam'])
-def spam(message):
-    user_id = message.from_user.id  
-    current_time = time.time()
-
-    if user_id in user_last_command_time:
-        elapsed_time = current_time - user_last_command_time[user_id]
-        if elapsed_time <20:
-            remaining_time = 20 - elapsed_time
-            bot.reply_to(message, f"Vui lòng đợi {remaining_time:.1f} giây trước khi sử dụng lệnh lại.")
-            return
-
-    params = message.text.split()[1:]
-    if len(params) != 2:
-        bot.reply_to(message, "/spam sdt số_lần (tối đa 35)")
-        return
-
-    sdt, count = params
-
-    if not count.isdigit():
-        bot.reply_to(message, "Số lần /spam không hợp lệ, vui lòng nhập số.")
-        return
-
-    count = int(count)
-
-    if count > 35:
-        bot.reply_to(message, "/spam sdt số_lần tối đa là 35")
-        return
-
-    if sdt in blacklist:
-        bot.reply_to(message, f"Số điện thoại {sdt} đã bị cấm spam.")
-        return
-    if user_id in user_spam_count and user_spam_count[user_id] >= 1:
-        bot.reply_to(message, "Bạn đã sử dụng lệnh spam quá số lần cho phép (1 lần). Hãy dùng /start để xem chi tiết các loại spam khác.")
-        return
-
-    user_spam_count[user_id] = user_spam_count.get(user_id, 0) + 1
-
-    diggory_chat3 = f'''┌──────⭓ {name_bot}
-│ Spam: Thành Công 
-│ Người dùng : {message.from_user.username}
-│ Số Lần Spam : {count}
-│ Đang Tấn Công : {sdt}
-└─────────────'''
-
-    script_filename = "spam.py"
     
-    try:
-        if not os.path.isfile(script_filename):
-            bot.reply_to(message, "Không tìm thấy file.")
-            return
-        with open(script_filename, 'r', encoding='utf-8') as file:
-            script_content = file.read()
-
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as temp_file:
-            temp_file.write(script_content.encode('utf-8'))
-            temp_file_path = temp_file.name
-
-        subprocess.Popen(["python", temp_file_path, sdt, str(count)])
-        sdt_request = f"84{sdt[1:]}" if sdt.startswith("0") else sdt
-
-        bot.send_message(
-            message.chat.id,
-            f'<blockquote>{diggory_chat3}</blockquote>\n<blockquote>GÓI NGƯỜI DÙNG: FREE</blockquote>',
-            parse_mode='HTML'
-        )
-
-        requests.get(f'https://dichvukey.site/apivl/call1.php?sdt={sdt_request}')
-
-        user_last_command_time[user_id] = time.time()
-
-    except Exception as e:
-        print(f'Lỗi')
-        
-        
-processes = []
-last_spam_time = {}
-
-def TimeStamp():
-    return datetime.date.today()
-
-def TimeStamp():
-    return datetime.datetime.now().strftime("%Y-%m-%d")
-
 API_URL = "https://api.ffcommunity.site/randomvideo.php"
 
-@dp.message(Command("randomvideo"))
-async def send_random_video(message: Message):
+@bot.message_handler(commands=['randomvideo'])
+def randomvideo(message):
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(API_URL) as response:
