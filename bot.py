@@ -175,7 +175,8 @@ def send_help(message):
  _____________________________________
 | /ff : check acc xem thông tin 
 | /gg : tìm ảnh 
-| /spam : spam sms
+| /spam : spam smm
+| /randomvideo : video gái xinh
 | /tv : chuyển đổi ngôn ngữ 
 | /spamvip : spam vip
 | /like : buff like
