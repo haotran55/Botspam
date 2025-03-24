@@ -20,6 +20,7 @@ from telebot import types
 from time import strftime
 import queue
 import pytz
+from flask import Flask
 admin_diggory = "ad_an_danhso5" 
 name_bot = "HaoEsports"
 zalo = "0585019743"
@@ -101,7 +102,7 @@ start_time = time.time()
 
 def fetch_data(user_id):
     try:
-        url = f'https://freefire-virusteam.vercel.app/info?uid={user_id}'
+        url = f'https://api.ffcommunity.site/info.php?uid={user_id}'
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         return response.json()
