@@ -168,6 +168,76 @@ Cấp độ chủ quân đoàn: {get_value('LeaderLevel', leader_info)}
         bot.reply_to(message, "<blockquote>Đã xảy ra lỗi</blockquote>", parse_mode="HTML")
 
 
+# Đường dẫn file lưu ID người dùng
+ID_FILE = "id.json"
+
+# Hàm gửi tin nhắn đến tất cả user đã lưu
+async def send_message_to_all(text):
+    try:
+        with open(ID_FILE, "r", encoding="utf-8") as file:
+            chat_ids = json.load(file)
+    except FileNotFoundError:
+        chat_ids = []
+    except json.JSONDecodeError:
+        chat_ids = []
+
+    for chat_id in chat_ids:
+        try:
+            await bot.send_message(chat_id, text)
+            logging.info(f"📤 Đã gửi tin nhắn đến chat {chat_id}")
+        except Exception as e:
+            logging.error(f"❌ Lỗi gửi tin nhắn đến {chat_id}: {e}")
+
+# Hàm kiểm tra giờ và gửi thông báo
+async def check_time_and_send_message():
+    from datetime import datetime
+    now = datetime.now()
+    hour = now.hour
+
+    if hour == 7:
+        message = "🌞 Chào buổi sáng! Hãy bắt đầu ngày mới với năng lượng tích cực!"
+    elif hour == 12:
+        message = "💤 Đã 12 giờ trưa, nghỉ ngơi một chút để tái tạo năng lượng!"
+    elif hour == 18:
+        message = "🌇 Chào buổi chiều! Hy vọng buổi tối của bạn sẽ thật thư giãn!"
+    elif hour == 0:
+        message = "🌙 Đã 12 giờ đêm, hãy đi ngủ sớm để có một ngày mới tràn đầy sức sống!"
+    else:
+        message = f"🕰️ Hiện tại là {hour} giờ. Hãy tận dụng thời gian một cách hiệu quả!"
+
+    await send_message_to_all(message)
+
+# Lưu chat ID vào danh sách khi có người nhắn tin bot
+@dp.message()
+async def save_chat_id(message: Message):
+    try:
+        with open(ID_FILE, "r", encoding="utf-8") as file:
+            chat_ids = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        chat_ids = []
+
+    if message.chat.id not in chat_ids:
+        chat_ids.append(message.chat.id)
+        with open(ID_FILE, "w", encoding="utf-8") as file:
+            json.dump(chat_ids, file, indent=4)
+        await message.answer("✅ Bạn đã đăng ký nhận thông báo tự động!")
+
+# Lệnh `/broadcast` để gửi thông báo thủ công
+@dp.message(Command("broadcast"))
+async def manual_broadcast(message: Message):
+    if message.from_user.id == 123456789:  # Thay bằng ID admin của bạn
+        text = message.text.replace("/broadcast ", "")
+        await send_message_to_all(text)
+        await message.answer("📢 Đã gửi thông báo đến tất cả người dùng!")
+    else:
+        await message.answer("⛔ Bạn không có quyền sử dụng lệnh này.")
+
+# Cấu hình lịch chạy tự động
+scheduler = AsyncIOScheduler()
+scheduler.add_job(check_time_and_send_message, "interval", hours=1)  # Chạy mỗi 1 giờ
+scheduler.start()
+
+
 @bot.message_handler(commands=['start'])
 def send_help(message):
     bot.reply_to(message, """<blockquote>
@@ -189,7 +259,7 @@ def send_help(message):
 |____________________________
 | /off : tắt bot
 | /on : bật bot
-| /addvip
+| /broadcast
 | /rs : khởi động lại bot
 |____________________________
 </blockquote>""", parse_mode="HTML")
