@@ -37,6 +37,7 @@ bot=telebot.TeleBot("7920158658:AAGyY9jA2B5Z3_n3vZzzQBDYaJoAddPqZ7s")
 #phu 8127007530:AAG1b4w__xXvIrAr7woZjN8BrC_l3g1hBwI
 print("Bot đã được khởi động thành công")
 dp = Dispatcher()
+scheduler = AsyncIOScheduler()
 users_keys = {}
 key = ""
 user_cooldown = {}
@@ -236,7 +237,7 @@ async def manual_broadcast(message: Message):
 # Cấu hình lịch chạy tự động
 scheduler = AsyncIOScheduler()
 scheduler.add_job(check_time_and_send_message, "interval", hours=1)  # Chạy mỗi 1 giờ
-scheduler.start()
+asyncio.run(main())
 
 
 @bot.message_handler(commands=['start'])
