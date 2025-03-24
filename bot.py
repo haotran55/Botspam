@@ -237,7 +237,6 @@ async def manual_broadcast(message: Message):
 # Cấu hình lịch chạy tự động
 scheduler = AsyncIOScheduler()
 scheduler.add_job(check_time_and_send_message, "interval", hours=1)  # Chạy mỗi 1 giờ
-asyncio.run(main())
 
 
 @bot.message_handler(commands=['start'])
