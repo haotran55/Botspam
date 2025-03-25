@@ -26,6 +26,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import FSInputFile
 from aiogram.types import Message 
 from aiogram.filters import Command
+from apscheduler.schedulers.asyncio import AsyncIOScheduler  # ✅ Đúng
 admin_diggory = "ad_an_danhso5" 
 name_bot = "HaoEsports"
 zalo = "0585019743"
