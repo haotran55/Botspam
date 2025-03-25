@@ -9,5 +9,6 @@ aiogram
 aiohttp
 apscheduler
 gunicorn
+python-telegram-bot
 
 
