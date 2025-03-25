@@ -34,7 +34,7 @@ zalo = "0585019743"
 web = "https://dichvukey.site/"
 facebook = "no"
 bot=telebot.TeleBot("7920158658:AAGyY9jA2B5Z3_n3vZzzQBDYaJoAddPqZ7s") 
-#real 
+bot_app = Application.builder().token(TOKEN).build()
 #phu 8127007530:AAG1b4w__xXvIrAr7woZjN8BrC_l3g1hBwI
 print("Bot đã được khởi động thành công")
 dp = Dispatcher()
@@ -430,7 +430,7 @@ def key(message):
     user_id = message.from_user.id
     key = message.text.split()[1]
     today_day = datetime.date.today().day
-    expected_key = "vLong" + str(user_id * today_day - 2007)  # Đảm bảo công thức khớp với công thức tạo key
+    expected_key = "HaoEsport" + str(user_id * today_day - 2007)  # Đảm bảo công thức khớp với công thức tạo key
 
     if key == expected_key:
         text_message = f'<blockquote>[ KEY HỢP LỆ ] NGƯỜI DÙNG CÓ ID: [ {user_id} ] ĐƯỢC PHÉP ĐƯỢC SỬ DỤNG CÁC LỆNH TRONG [/start]</blockquote>'
@@ -442,12 +442,11 @@ def key(message):
         with open(f'{user_path}/{user_id}.txt', "w") as fi:
             fi.write("")
     else:
-        bot.reply_to(message, 'KEY KHÔNG HỢP LỆ.')
+        bot.reply_to(message, 'KEY KHÔNG HỢP 
+     
+        import threading
+# Chạy bot Telegram trong luồng riêng
+def run_bot():
+    bot_app.run_polling()
 
-
-
-
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8080))  # Render cấp cổng
-    threading.Thread(target=bot_app.run_polling, daemon=True).start()
-    app.run(host="0.0.0.0", port=port)
+threading.Thread(target=run_bot, daemon=True).start()
