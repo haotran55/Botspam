@@ -442,7 +442,7 @@ def key(message):
         with open(f'{user_path}/{user_id}.txt', "w") as fi:
             fi.write("")
     else:
-        bot.reply_to(message, 'KEY KHÔNG HỢP 
+        bot.reply_to(message, 'KEY KHÔNG HỢP')
      
         import threading
 # Chạy bot Telegram trong luồng riêng
