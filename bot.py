@@ -446,4 +446,4 @@ def key(message):
      
         if __name__ == "__main__":
     if bot_active:
-    bot_active = True  # ✅ Đã thụt vào đúng cách
+       bot_active = True  # ✅ Đã thụt vào đúng cách
