@@ -444,9 +444,6 @@ def key(message):
     else:
         bot.reply_to(message, 'KEY KHÔNG HỢP')
      
-        import threading
-# Chạy bot Telegram trong luồng riêng
-def run_bot():
-    bot.polling(none_stop=True)
-
-threading.Thread(target=run_bot, daemon=True).start()
+        if __name__ == "__main__":
+    bot_active = True
+    bot.infinity_polling()
