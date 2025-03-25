@@ -28,6 +28,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from flask import Flask
 from apscheduler.schedulers.asyncio import AsyncIOScheduler  # ✅ Đúng
+from telegram.ext import Application
 admin_diggory = "ad_an_danhso5" 
 name_bot = "HaoEsports"
 zalo = "0585019743"
