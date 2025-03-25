@@ -27,6 +27,9 @@ from aiogram.types import FSInputFile
 from aiogram.types import Message 
 from aiogram.filters import Command
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from bot import start_bot  # Giả sử hàm khởi chạy bot tên là start_bot
+
+asyncio.run(start_bot())  # Chạy bot trực tiếp mà không mở cổng
 admin_diggory = "ad_an_danhso5" 
 name_bot = "HaoEsports"
 zalo = "0585019743"
