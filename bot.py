@@ -388,30 +388,6 @@ def search_google_image(message):
 def TimeStamp():
     return datetime.datetime.now().strftime("%Y-%m-%d")
     
-API_URL = "https://api.ffcommunity.site/randomvideo.php"
-
-@bot.message_handler(commands=['randomvideo'])
-def randomvideo(message):
-    try:
-       async def fetch_data():
-    async with aiohttp.ClientSession() as session:  # Đúng (có thụt dòng)
-        async with session.get("https://api.example.com/data") as response:
-            return await response.text()
-
-async def main():
-    data = await fetch_data()
-    print(data)
-
-asyncio.run(main())
-                    if video_url.startswith("http"):  # Kiểm tra xem API có trả về URL hợp lệ không
-                        await message.answer_video(video_url)
-                    else:
-                        await message.answer(f"Lỗi: API trả về dữ liệu không hợp lệ - {video_url}")
-                else:
-                    await message.answer(f"Lỗi: API không phản hồi, mã lỗi HTTP {response.status}")
-    except Exception as e:
-        await message.answer(f"Lỗi: {str(e)}")
-        
 @bot.message_handler(commands=['getkey'])
 def startkey(message):
     user_id = message.from_user.id
