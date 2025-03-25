@@ -394,10 +394,15 @@ API_URL = "https://api.ffcommunity.site/randomvideo.php"
 def randomvideo(message):
     try:
        async def fetch_data():
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession() as session:  # Đúng (có thụt dòng)
         async with session.get("https://api.example.com/data") as response:
             return await response.text()
 
+async def main():
+    data = await fetch_data()
+    print(data)
+
+asyncio.run(main())
                     if video_url.startswith("http"):  # Kiểm tra xem API có trả về URL hợp lệ không
                         await message.answer_video(video_url)
                     else:
