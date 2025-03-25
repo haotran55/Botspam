@@ -449,10 +449,5 @@ def key(message):
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8080))  # Render cấp cổng
-    import threading
-
-    # Chạy bot Telegram trong luồng riêng
     threading.Thread(target=bot_app.run_polling, daemon=True).start()
-
-    # Chạy Flask web server
     app.run(host="0.0.0.0", port=port)
