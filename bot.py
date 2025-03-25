@@ -34,7 +34,7 @@ name_bot = "HaoEsports"
 zalo = "0585019743"
 web = "https://dichvukey.site/"
 facebook = "no"
-bot=telebot.TeleBot("7920158658:AAGyY9jA2B5Z3_n3vZzzQBDYaJoAddPqZ7s"
+bot=telebot.TeleBot("7920158658:AAGyY9jA2B5Z3_n3vZzzQBDYaJoAddPqZ7s")
 #phu 8127007530:AAG1b4w__xXvIrAr7woZjN8BrC_l3g1hBwI
 print("Bot đã được khởi động thành công")
 dp = Dispatcher()
