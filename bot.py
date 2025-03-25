@@ -445,5 +445,5 @@ def key(message):
         bot.reply_to(message, 'KEY KHÔNG HỢP')
      
         if __name__ == "__main__":
-    bot_active = True
-    bot.infinity_polling()
+         bot_active = True
+         bot.infinity_polling()
