@@ -24,9 +24,6 @@ import asyncio
 import aiohttp
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import FSInputFile
-from aiogram.types import Message 
-from aiogram.filters import Command
-from flask import Flask
 from apscheduler.schedulers.asyncio import AsyncIOScheduler  # ✅ Đúng
 from telegram.ext import Application
 admin_diggory = "ad_an_danhso5" 
@@ -55,13 +52,6 @@ last_command_time = {}
 
 last_command_timegg = 0
 
-app = Flask(__name__)
-
-
-@app.route("/")
-def home():
-    return "Bot Telegram đang chạy!"
-    
 def check_command_cooldown(user_id, command, cooldown):
     current_time = time.time()
     
