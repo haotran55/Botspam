@@ -393,10 +393,11 @@ API_URL = "https://api.ffcommunity.site/randomvideo.php"
 @bot.message_handler(commands=['randomvideo'])
 def randomvideo(message):
     try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(API_URL) as response:
-                if response.status == 200:
-                    video_url = await response.text()
+       async def fetch_data():
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://api.example.com/data") as response:
+            return await response.text()
+
                     if video_url.startswith("http"):  # Kiểm tra xem API có trả về URL hợp lệ không
                         await message.answer_video(video_url)
                     else:
