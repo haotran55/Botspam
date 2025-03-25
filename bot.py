@@ -26,6 +26,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.types import FSInputFile
 from aiogram.types import Message 
 from aiogram.filters import Command
+from flask import Flask
 from apscheduler.schedulers.asyncio import AsyncIOScheduler  # ✅ Đúng
 admin_diggory = "ad_an_danhso5" 
 name_bot = "HaoEsports"
@@ -54,6 +55,13 @@ last_command_time = {}
 
 last_command_timegg = 0
 
+app = Flask(__name__)
+
+
+@app.route("/")
+def home():
+    return "Bot Telegram đang chạy!"
+    
 def check_command_cooldown(user_id, command, cooldown):
     current_time = time.time()
     
@@ -438,6 +446,13 @@ def key(message):
 
 
 
+
 if __name__ == "__main__":
-    bot_active = True
-    bot.infinity_polling()
+    port = int(os.getenv("PORT", 8080))  # Render cấp cổng
+    import threading
+
+    # Chạy bot Telegram trong luồng riêng
+    threading.Thread(target=bot_app.run_polling, daemon=True).start()
+
+    # Chạy Flask web server
+    app.run(host="0.0.0.0", port=port)
