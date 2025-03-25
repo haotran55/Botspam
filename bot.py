@@ -445,6 +445,6 @@ def key(message):
         bot.reply_to(message, 'KEY KHÔNG HỢP')
      
         if __name__ == "__main__":
-    if bot_active:
-       pass  # ✅ Tránh lỗi IndentationError
+        bot.infinity_polling()
+            pass  # ✅ Tránh lỗi IndentationError
 
