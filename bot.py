@@ -60,7 +60,7 @@ def startkey(message):
         else:
             bot.reply_to(message, 'Lỗi.')
     except requests.RequestException:
-        bot.reply_to(message, 'Lỗi.'
+        bot.reply_to(message, 'Lỗi.')
 
 @bot.message_handler(commands=['key'])
 def key(message):
