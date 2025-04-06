@@ -31,7 +31,8 @@ name_bot = "HaoEsports"
 zalo = "0585019743"
 web = "https://dichvukey.site/"
 facebook = "no"
-bot=telebot.TeleBot("7920158658:AAGyY9jA2B5Z3_n3vZzzQBDYaJoAddPqZ7s")
+bot=telebot.TeleBot("7949863057:AAETRiCemVJk4lsb2-Y_7KEVzE5fsfZ0Jd4
+")
 #phu 8127007530:AAG1b4w__xXvIrAr7woZjN8BrC_l3g1hBwI
 print("Bot đã được khởi động thành công")
 dp = Dispatcher()
@@ -45,7 +46,7 @@ last_sms_time = {}
 global_lock = Lock()
 allowed_users = []
 processes = []
-ADMIN_ID =  7713922358 #nhớ thay id nhé nếu k thay k duyệt dc vip đâu v.L..ong.a
+ADMIN_ID =  7658079324 #nhớ thay id nhé nếu k thay k duyệt dc vip đâu v.L..ong.a
 connection = sqlite3.connect('user_data.db')
 cursor = connection.cursor()
 last_command_time = {}
